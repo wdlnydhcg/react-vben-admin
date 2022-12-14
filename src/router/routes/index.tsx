@@ -2,15 +2,15 @@
  * @Author: MrAlenZhong
  * @Date: 2022-12-13 16:37:05
  * @LastEditors: MrAlenZhong
- * @LastEditTime: 2022-12-13 18:29:28
+ * @LastEditTime: 2022-12-14 19:09:04
  * @Description: 
  */
 import React from "react";
-import { mainOutRoutes } from "./mainOut";
+// import { mainOutRoutes } from "./mainOut";
+import Login from "../../views/login";
 
-import Dashboard from '/@/scenes/dashboard';
-import Login from "/@/scenes/login";
-
+import { Navigate } from "react-router-dom";
+import { PageEnum } from "/@/enums/pageEnum";
 // import.meta.globEager() 直接引入所有的模块 Vite 独有的功能
 const modules = import.meta.globEager('./modules/**/*.tsx');
 const routeModuleList: any[] = [];
@@ -27,7 +27,7 @@ export const asyncRoutes = [...routeModuleList];
 // 根路由
 export const RootRoute = {
   path: "/",
-  element: <Dashboard />,
+  element: <Navigate to={PageEnum.BASE_HOME}/>
 }
 // 登录页面路由
 export const LoginRoute = {
@@ -35,9 +35,10 @@ export const LoginRoute = {
   element: <Login />,
 }
 
-// 未经许可的基本路由
+// 不需要经许可的基本路由
 export const basicRoutes = [
   LoginRoute,
   RootRoute,
-  ...mainOutRoutes,
+  ...asyncRoutes
+  // ...mainOutRoutes,
 ]
